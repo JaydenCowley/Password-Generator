@@ -1,4 +1,4 @@
-# Password Generator Starter Code
+# Password Generator
 I started by making arrays of each character type 
 Added window prompts to select weither or not to include each character type in the generated password
 if a character type was selected it is added to an empty array named allChar
