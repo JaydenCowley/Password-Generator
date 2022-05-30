@@ -86,8 +86,6 @@ var getPassPerameters = function () {
   generatePassword();
   console.log("this is the guarenteedChars array " + guaranteedChars)
   console.log("this is the generated password array " + generatedPasswordArr)
-
-  console.log(allChar);
   
   // Write password to the #password input
   function writePassword() {
@@ -98,7 +96,9 @@ var getPassPerameters = function () {
     
   }
   writePassword();
-  
+  guaranteedChars = [];
+  generatedPasswordArr = [];
+  allChar = [];
 };
 
 
