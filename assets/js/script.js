@@ -7,6 +7,12 @@ const speclChar = ["/", "*", "-", "+", "!", "@", "#", "$", "%", "^", "&", "*", "
 var allChar = [];
 var guaranteedChars = [];
 var passLength = 0;
+function getRandom(arr) {
+  // generate a random number based on the length of the array parameter
+  // grab an element based on the randomly generated number ref 65
+  // return the randomly generated element
+  guaranteedChars.push(arr[Math.floor(Math.random() * arr.length)]);
+};
 // Getting Password Parameters
 var getPassPerameters = function () {
   passLength = window.prompt("How many characters would you like your password to be? Between 8 and 128.")
@@ -14,101 +20,97 @@ var getPassPerameters = function () {
     window.alert("Please, enter a number between 8 and 128.")
     passLength = prompt("How many characters would you like your password to be? Between 8 and 128.")
   }
-};
-  console.log("Set password length is " + passLength + " Characters")
-// Getting character preferences
+  var lowerCase =
+    window.confirm("Would you like your password to include lowercase letters?");
 
-var lowerCase =
-  window.confirm("Would you like your password to include lowercase letters?");
+  var upperCase =
+    window.confirm("Would you like your password to include UPPERCASE LETTERS?");
 
-var upperCase =
-  window.confirm("Would you like your password to include UPPERCASE LETTERS?");
+  var numeric =
+    window.confirm("Would you like your password to include Numbers?");
 
-var numeric =
-  window.confirm("Would you like your password to include Numbers?");
-
-var specialChars =
-  window.confirm("Would you like your password to include Special Characters?");
-
-getPassPerameters();
-
-// Generated password info object
-var generatedPasswordInfo = {
-  passwordLength: parseInt(passLength),
-  lowerCase: lowerCase,
-  upperCase: upperCase,
-  numeric: numeric,
-  specialChars: specialChars
-};
-
-function getRandom(arr) {
-  // generate a random number based on the length of the array parameter
-  // grab an element based on the randomly generated number ref 65
-  // return the randomly generated element
-  guaranteedChars.push(arr[Math.floor(Math.random() * arr.length)]);
-}
-console.log(generatedPasswordInfo)
-// make sure at least one option is picked
-if (generatedPasswordInfo.upperCase === false && generatedPasswordInfo.lowerCase === false && generatedPasswordInfo.numeric === false && generatedPasswordInfo.specialChars === false) {
-  window.alert("Please select at least one option")
-  getPassPerameters();
-}
-// generate array for password generation
-if (generatedPasswordInfo.lowerCase) {
-  allChar = allChar.concat(lCase);
-// add getRandom()
-  getRandom(lCase);
-// add result of getRandom to guaranteedChars
-};
-if (generatedPasswordInfo.upperCase) {
-  allChar = allChar.concat(uCase);
-  getRandom(uCase);
-};
-if (generatedPasswordInfo.numeric) {
-  allChar = allChar.concat(numbers);
-  getRandom(numbers);
-};
-if (generatedPasswordInfo.specialChars) {
-  allChar = allChar.concat(speclChar);
-  getRandom(speclChar)
-};
-
-// generate password
-var generatedPasswordArr = [];
-// Generate random password
-var generatePassword = function () {
-  for (var i = 0; i <= generatedPasswordInfo.passwordLength - 1; i++) {
-    console.log(i)
-    
-    // console.log(Math.floor(Math.random() * allChar.length));
-    generatedPasswordArr.push(allChar[Math.floor(Math.random() * allChar.length)]);
+  var specialChars =
+    window.confirm("Would you like your password to include Special Characters?");
+  // Generated password info object
+  var generatedPasswordInfo = {
+    passwordLength: parseInt(passLength),
+    lowerCase: lowerCase,
+    upperCase: upperCase,
+    numeric: numeric,
+    specialChars: specialChars
   };
-  // splice the generatedPasswordArr
-  generatedPasswordArr.splice(
-    // Start splicing at the start of the generatedPasswordArr
-    0,
-    // Remove the lenght of the guaranteedChars from the generatedPasswordArr
-    guaranteedChars.length,
-    // insert the guaranteedChars Array
-    guaranteedChars.join(""))
-}
-generatePassword();
-console.log("this is the guarenteedChars array " + guaranteedChars)
-console.log("this is the generated password array " + generatedPasswordArr)
+  console.log("Set password length is " + passLength + " Characters")
+  console.log(generatedPasswordInfo)
+  // make sure at least one option is picked
+  if (generatedPasswordInfo.upperCase === false && generatedPasswordInfo.lowerCase === false && generatedPasswordInfo.numeric === false && generatedPasswordInfo.specialChars === false) {
+    window.alert("Please select at least one option")
+    getPassPerameters();
+  }
+  // generate array for password generation
+  if (generatedPasswordInfo.lowerCase) {
+    allChar = allChar.concat(lCase);
+    // add getRandom()
+    getRandom(lCase);
+    // add result of getRandom to guaranteedChars
+  };
+  if (generatedPasswordInfo.upperCase) {
+    allChar = allChar.concat(uCase);
+    getRandom(uCase);
+  };
+  if (generatedPasswordInfo.numeric) {
+    allChar = allChar.concat(numbers);
+    getRandom(numbers);
+  };
+  if (generatedPasswordInfo.specialChars) {
+    allChar = allChar.concat(speclChar);
+    getRandom(speclChar)
+  };
+  // generate password
+  var generatedPasswordArr = [];
+  // Generate random password
+  var generatePassword = function () {
+    for (var i = 0; i <= generatedPasswordInfo.passwordLength - 1; i++) {
 
-console.log(allChar)
+      // console.log(Math.floor(Math.random() * allChar.length));
+      generatedPasswordArr.push(allChar[Math.floor(Math.random() * allChar.length)]);
+    };
+    // splice the generatedPasswordArr
+    generatedPasswordArr.splice(
+      // Start splicing at the start of the generatedPasswordArr
+      0,
+      // Remove the lenght of the guaranteedChars from the generatedPasswordArr
+      guaranteedChars.length,
+      // insert the guaranteedChars Array
+      guaranteedChars.join(""))
+  }
+  generatePassword();
+  console.log("this is the guarenteedChars array " + guaranteedChars)
+  console.log("this is the generated password array " + generatedPasswordArr)
+
+  console.log(allChar);
+  
+  // Write password to the #password input
+  function writePassword() {
+    var password = generatedPasswordArr.join("");
+    var passwordText = document.querySelector("#password");
+    
+    passwordText.value = password;
+    
+  }
+  writePassword();
+  
+};
+
+
+
+
+
+
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatedPasswordArr.join("");
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-}
-
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", getPassPerameters);
+
+
